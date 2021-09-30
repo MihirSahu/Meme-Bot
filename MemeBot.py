@@ -66,4 +66,8 @@ async def yomomma(ctx):
     joke = response.json()
     await ctx.send(joke['joke'])
 
+@client.command()
+async def testing(ctx):
+    print('This is testing')
+
 client.run('NzU2MDEwMDIzMTYyNzQwODE3.X2LnMw.mCfOlNorWmLEYEdNhuvUhgNK_Xw')
