@@ -17,7 +17,7 @@ async def on_message(message):
 #        await message.add_reaction("\U0001F921")
 #    if message.author.name == "Vsadygv":
 #        await message.add_reaction("\U0001F921")
-#    await client.process_commands(message)
+    await client.process_commands(message)
 
 @client.event
 async def on_message(message):
