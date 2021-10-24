@@ -9,15 +9,15 @@ client = commands.Bot(command_prefix = '!')
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-@client.event
-async def on_message(message):
-    if message.author.name == "MercenaryHarpy6":
-        await message.add_reaction("\U0001F921")
+#@client.event
+#async def on_message(message):
+#    if message.author.name == "MercenaryHarpy6":
+#        await message.add_reaction("\U0001F921")
 #    if message.author.name == "The One":
 #        await message.add_reaction("\U0001F921")
 #    if message.author.name == "Vsadygv":
 #        await message.add_reaction("\U0001F921")
-    await client.process_commands(message)
+#    await client.process_commands(message)
 
 @client.event
 async def on_message(message):
@@ -68,6 +68,6 @@ async def yomomma(ctx):
 
 @client.command()
 async def testing(ctx):
-    print('This is testing')
+    await ctx.send('This is testing')
 
 client.run('NzU2MDEwMDIzMTYyNzQwODE3.X2LnMw.mCfOlNorWmLEYEdNhuvUhgNK_Xw')
