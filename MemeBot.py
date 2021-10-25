@@ -21,6 +21,13 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
+    # Log content
+    if (type(message.content) is str) and (message.content.channel == "830289368882610199"):
+        with open("logs.txt", "a") as file:
+            file.write("/n" + message.content)
+
+    # Reactions
     if "June" in message.content or "june" in message.content:
         await message.add_reaction('\U0001F63B')
     if "Simp" in message.content or "simp" in message.content:
@@ -67,7 +74,8 @@ async def yomomma(ctx):
     await ctx.send(joke['joke'])
 
 @client.command()
-async def testing(ctx):
-    await ctx.send('This is testing')
+async def exportLogs(ctx):
+    channel = client.get_channel("830616398408712202")
+    await ctx.send(file=discord.File(r'logs.txt'))
 
 client.run('NzU2MDEwMDIzMTYyNzQwODE3.X2LnMw.mCfOlNorWmLEYEdNhuvUhgNK_Xw')
