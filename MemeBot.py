@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import requests
+import datetime
 
 #client = discord.Client()
 client = commands.Bot(command_prefix = '!')
@@ -24,9 +25,10 @@ async def on_ready():
 async def on_message(message):
 
     # Log content
-    if (type(message.content) is str) and (message.content.channel == "830289368882610199"):
-        with open("logs.txt", "a") as file:
-            file.write("/n" + message.content)
+    #if (type(message.content) is str) and (message.channel.id == 762537657926418432) and (message.author.name != "ReactBot"):   # Testing
+    if (type(message.content) is str) and (message.channel.id == 830289368882610199) and (message.author.name != "ReactBot"):
+        with open("/home/theonlyonzz/Projects/Meme-Bot/logs.txt", "a+") as file:
+            file.write(str(datetime.datetime.now()) + "\t" + message.author.name + "\t" + "\t" + message.content + "\n")
 
     # Reactions
 
@@ -72,26 +74,25 @@ async def on_message(message):
 
     #New dictionary based implementation
     keywords = {
-        "June": "await message.add_reaction('\U0001F63B')",
-        "Simp": "await message.add_reaction('\U0001F921')",
-        "Hot": "await message.add_reaction('\U0001F60B')",
-        "Feet": "await message.add_reaction('\U0001F4A6')",
-        "LMAO": "await message.add_reaction('\U0001F602')",
-        "LMFAO": "await message.add_reaction('\U0001F923')",
-        "no homo": "await message.add_reaction('\U0001F46C')",
-        "thiCC": "await message.add_reaction('\U0001F351')",
-        "sp00k": "await message.add_reaction('\U0001F631')",
-        "thonk": "await message.add_reaction('\U0001F914')",
-        "each other": "await message.add_reaction('\U0001F440')",
-        "bye": "await message.add_reaction('\U0001F44B')",
-        "gn": "await message.add_reaction('\U0001F319')",
-        "shit": "await message.add_reaction('\U0001F4A9')",
-        "rip": "await message.add_reaction('\U0001F622')",
-        "oof": "await message.add_reaction('\U0001F921')"
+        "simp": '\U0001F921',
+        "hot": '\U0001F60B',
+        "Feet": '\U0001F4A6',
+        "LMAO": '\U0001F602',
+        "LMFAO": '\U0001F923',
+        "no homo": '\U0001F46C',
+        "thiCC": '\U0001F351',
+        "sp00k": '\U0001F631',
+        "thonk": '\U0001F914',
+        "each other": '\U0001F440',
+        "bye": '\U0001F44B',
+        "gn": '\U0001F319',
+        "shit": '\U0001F4A9',
+        "rip": '\U0001F622',
+        "oof": '\U0001F921'
     }
     for idx, i in enumerate(keywords.keys()):
         if i in message.content:
-            exec(keywords.values()[idx])
+            await message.add_reaction(list(keywords.values())[idx])
     await client.process_commands(message)
 
 @client.command()
@@ -102,7 +103,9 @@ async def yomomma(ctx):
 
 @client.command()
 async def exportLogs(ctx):
-    channel = client.get_channel("830616398408712202")
-    await ctx.send(file=discord.File(r'logs.txt'))
+    #channel = client.get_channel(762537657926418432)    # Testing
+    channel = client.get_channel(830616398408712202)
+    await ctx.send(file=discord.File('/home/theonlyonzz/Projects/Meme-Bot/logs.txt'))
+    await ctx.send("Logs exported!")
 
 client.run('NzU2MDEwMDIzMTYyNzQwODE3.X2LnMw.mCfOlNorWmLEYEdNhuvUhgNK_Xw')
