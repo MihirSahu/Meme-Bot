@@ -25,9 +25,9 @@ async def on_ready():
 async def on_message(message):
 
     # Log content
-    #if (type(message.content) is str) and (message.channel.id == 762537657926418432) and (message.author.name != "ReactBot"):   # Testing
     if (type(message.content) is str) and (message.channel.id == 830289368882610199) and (message.author.name != "ReactBot"):
-        with open("/home/theonlyonzz/Projects/Meme-Bot/logs.txt", "a+") as file:
+        # This path is from my linode VM, where this bot is being hosted
+        with open("/home/user1/logs.txt", "a+") as file:
             file.write(str(datetime.datetime.now()) + "\t" + message.author.name + "\t" + "\t" + message.content + "\n")
 
     # Reactions
@@ -103,9 +103,9 @@ async def yomomma(ctx):
 
 @client.command()
 async def exportLogs(ctx):
-    #channel = client.get_channel(762537657926418432)    # Testing
     channel = client.get_channel(830616398408712202)
-    await ctx.send(file=discord.File('/home/theonlyonzz/Projects/Meme-Bot/logs.txt'))
+    # This path is from my linode VM, where this bot is being hosted
+    await ctx.send(file=discord.File('/home/user1/logs.txt'))
     await ctx.send("Logs exported!")
 
 client.run('NzU2MDEwMDIzMTYyNzQwODE3.X2LnMw.mCfOlNorWmLEYEdNhuvUhgNK_Xw')
