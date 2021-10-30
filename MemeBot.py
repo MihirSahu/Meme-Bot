@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import requests
 import datetime
+import os
 
 #client = discord.Client()
 client = commands.Bot(command_prefix = '!')
@@ -100,10 +101,20 @@ async def yomomma(ctx):
     await ctx.send(joke['joke'])
 
 @client.command()
-async def exportLogs(ctx):
+async def exportLogs(ctx, range):
     channel = client.get_channel(830616398408712202)
-    # This path is from my linode VM, where this bot is being hosted
-    await ctx.send(file=discord.File('/home/user1/logs.txt'))
-    await ctx.send("Logs exported!")
+
+    if range == "all":
+        # This path is from my linode VM, where this bot is being hosted
+        await ctx.send(file=discord.File('/home/user1/logs.txt'))
+        await ctx.send("Logs exported!")
+    else:
+        with open('/home/user1/logs.txt', 'r') as file:
+            lines = file.readlines()[-1 * int(range)]
+        with open('/home/user1/temp.txt', 'a+') as file:
+            file.write(lines)
+        await ctx.send(file=discord.File('/home/user1/temp.txt'))
+        os.remove('/home/user1/temp.txt')
+        await ctx.send("Logs exported!")
 
 client.run('Token goes here')
