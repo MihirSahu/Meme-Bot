@@ -110,7 +110,8 @@ async def exportLogs(ctx, range):
         await ctx.send("Logs exported!")
     else:
         with open('/home/user1/logs.txt', 'r') as file:
-            lines = file.readlines()[-1 * int(range)]
+            lines = file.readlines()[-1 * (int(range) + 1)]
+        lines = lines[::-1]
         with open('/home/user1/temp.txt', 'a+') as file:
             file.write(lines)
         await ctx.send(file=discord.File('/home/user1/temp.txt'))
