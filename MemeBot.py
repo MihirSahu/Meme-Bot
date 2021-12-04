@@ -118,4 +118,14 @@ async def exportLogs(ctx, range):
         os.remove('/home/user1/temp.txt')
         await ctx.send("Logs exported!")
 
+@client.command()
+async def delAllComments(ctx):
+    messages = await ctx.channel.history(limit=10000).flatten()
+    print(f"Message list created. List contains {len(messages)} comments. Deleting all messages...")
+    await ctx.send(f"Message list created. List contains {len(messages)} comments. Deleting all messages...")
+    for message in messages:
+        if message.author.name == 'The One':
+            await message.delete()
+    await ctx.send("Messages deleted!")
+
 client.run('Token goes here')
